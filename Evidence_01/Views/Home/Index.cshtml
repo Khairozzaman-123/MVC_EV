@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Evidence_01.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Product List</h2>
+            <div class="text-right">
+                @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
+            </div>
+            <table class="table table-bordered table-hover" style="margin-top:10px;">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                        <th>Category</th>
+                        <th>Order Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price.ToString("0.00")</td>
+                            <td><img src="@Url.Content(item.Picture)" width="50" /></td>
+                            <td>@item.Category.CategoryName</td>
+                            <td>@item.OrderDate.ToShortDateString()</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
